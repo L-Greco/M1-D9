@@ -53,8 +53,8 @@
         margin-bottom: 1rem;
       }
       .number h3 {
-        font-weight: 300;
-        font-size: 26px;
+        font-weight: 500;
+        font-size: 45px;
         margin: 0;
         position: relative;
         top: 50%;
@@ -114,36 +114,45 @@
   <input type="button" value="Clear the table" onclick="location.reload()" />
   </div>
 
-
+<div id="userTable">
+  <h2>User Table</h2>
+</div>
 
 
 
     <script>
        const bingo = document.getElementById("bingo")
-       const pressedAlready = true
+       let highlighted = []   // the array that holds the value of the highlighted cells
+       let rng
        window.onload = function () {           
             for(i=0;i<76;i++){
                 const child = document.createElement("div")
                 const number = document.createElement("h3")
+                highlighted[i]=[]         //  na pw giati to kanw auto to array edw
                child.className="number"
                 number.innerText= i+1
                 child.appendChild(number)
                 bingo.appendChild(child)
             }
             }
-            let rng = 0
+         
             const bingoNumber = function () {
-              const newRng =  Math.round(Math.random()*76)
-               while(rng ===newRng ){
-                   newRng= Math.round(Math.random()*76)
-               }   
-               rng= newRng         
+                  rng= Math.round(Math.random()*75)
+                   while (rng+1 === highlighted[rng]){
+                    rng= Math.round(Math.random()*75) 
+                   }
+
+
+                      
               for(i=0;i<76;i++){
-                if (rng === i+1) {
-                    bingo.children[i+1].setAttribute("id","winningNumber")
-                }
+            
+                if (rng === i ) {
+                    bingo.children[i].setAttribute("id","winningNumber")
+                    highlighted[i]= i+1
+                } 
                 
             }
+
             }
     </script>
 </body>
